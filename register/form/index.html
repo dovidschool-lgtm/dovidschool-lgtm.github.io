@@ -22,14 +22,24 @@
 <meta name="theme-color" content="#0b4f85">
 <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
 <link rel="apple-touch-icon" href="../../assets/img/favicon.png">
+<script>
+(function () {
+  var r = document.documentElement;
+  try { if (sessionStorage.getItem('introSeen')) r.classList.add('no-intro'); } catch (e) { r.classList.add('no-intro'); }
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) r.classList.add('motion');
+  setTimeout(function () { if (!window.siteReady) r.classList.remove('motion'); }, 4000);
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Rubik:wght@500;600;700&display=swap">
 <link rel="stylesheet" href="../../assets/style.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"School","name":"Dovid School","alternateName":["דויד סקול","בית חינוך דוד"],"url":"https://dovidschool-lgtm.github.io","logo":"https://dovidschool-lgtm.github.io/assets/img/logo.png","email":"dovidschool@gmail.com","telephone":"+525661451766","address":{"@type":"PostalAddress","streetAddress":"Calle 7 entre 20 y 25, Centro","postalCode":"77668","addressLocality":"Cozumel","addressRegion":"Quintana Roo","addressCountry":"MX"},"sameAs":["https://www.instagram.com/dovid_school/"]}</script>
 </head>
-<body>
+<body data-page="registerForm">
 <a class="skip" href="#main">דילוג לתוכן</a>
+<div class="scroll-progress" aria-hidden="true"><i></i></div>
+
 <header class="site-header">
   <div class="wrap header-row">
     <a class="brand" href="../../">
@@ -214,6 +224,7 @@
   </div>
   <p class="wrap footer-legal">© 2026 בית חינוך דוד · כל הזכויות שמורות</p>
 </footer>
+
 
 <script src="../../assets/site.js" defer></script>
 <script src="../../assets/register.js" defer></script>
