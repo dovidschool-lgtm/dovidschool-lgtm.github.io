@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dovidschool-lgtm.github.io/sitemap.xml
