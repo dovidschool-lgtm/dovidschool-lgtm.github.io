@@ -25,15 +25,16 @@
 <script>
 (function () {
   var r = document.documentElement;
+  r.classList.add('scrub');
   try { if (sessionStorage.getItem('introSeen')) r.classList.add('no-intro'); } catch (e) { r.classList.add('no-intro'); }
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) r.classList.add('motion');
-  setTimeout(function () { if (!window.siteReady) r.classList.remove('motion'); }, 4000);
+  setTimeout(function () { if (!window.siteReady) r.classList.remove('motion', 'scrub'); }, 4000);
 })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Rubik:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="../../../assets/style.css">
+<link rel="stylesheet" href="../../../assets/style.css?v=f5d1c1e4">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"School","name":"Dovid School","alternateName":["דויד סקול","בית חינוך דוד"],"url":"https://dovidschool-lgtm.github.io","logo":"https://dovidschool-lgtm.github.io/assets/img/logo.png","email":"dovidschool@gmail.com","telephone":"+525661451766","address":{"@type":"PostalAddress","streetAddress":"Calle 7 entre 20 y 25, Centro","postalCode":"77668","addressLocality":"Cozumel","addressRegion":"Quintana Roo","addressCountry":"MX"},"sameAs":["https://www.instagram.com/dovid_school/"]}</script>
 </head>
 <body data-page="registerForm">
@@ -226,7 +227,7 @@
 </footer>
 
 
-<script src="../../../assets/site.js" defer></script>
-<script src="../../../assets/register.js" defer></script>
+<script src="../../../assets/site.js?v=f5d1c1e4" defer></script>
+<script src="../../../assets/register.js?v=f5d1c1e4" defer></script>
 </body>
 </html>

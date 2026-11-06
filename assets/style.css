@@ -359,8 +359,8 @@ ul, ol { margin: 0; padding: 0; }
 .marquee-track > div { display: flex; flex: none; }
 .marquee span { font-family: var(--font-head); font-weight: 600; font-size: 1.1rem; white-space: nowrap; padding-inline: 22px; position: relative; }
 .marquee span::after { content: ''; position: absolute; inset-inline-end: -4px; top: 50%; width: 8px; height: 8px; margin-top: -4px; border-radius: 50%; background: var(--navy); }
-.motion .marquee-track { animation: marquee 34s linear infinite; }
-[dir="rtl"] .motion .marquee-track { animation-name: marqueeRtl; }
+.marquee-track { animation: marquee 34s linear infinite; }
+[dir="rtl"] .marquee-track { animation-name: marqueeRtl; }
 .marquee:hover .marquee-track { animation-play-state: paused; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 @keyframes marqueeRtl { to { transform: translateX(50%); } }
@@ -374,12 +374,12 @@ ul, ol { margin: 0; padding: 0; }
 .open-text h2 { color: var(--white); font-size: clamp(1.8rem, 5vw, 3.2rem); }
 .open-text p { font-size: clamp(1.15rem, 2.6vw, 1.5rem); margin: 0; }
 .open-frame::after { content: ''; position: absolute; inset: 0; background: rgba(8, 58, 99, .55); }
-.motion .open-scroll { height: 240vh; }
-.motion .open-pin { position: sticky; top: 0; height: 100vh; min-height: 0; }
-.motion .open-frame { clip-path: inset(var(--inset-y, 24%) var(--inset-x, 24%) round var(--round, 36px)); }
-.motion .open-frame img { transform: scale(var(--zoom, 1.22)); }
-.motion .open-frame::after { opacity: var(--shade, 0); }
-.motion .open-text { opacity: var(--shade, 0); transform: translateY(var(--text-y, 24px)); }
+.scrub .open-scroll { height: 280vh; }
+.scrub .open-pin { position: sticky; top: 0; height: 100vh; height: 100svh; min-height: 0; }
+.scrub .open-frame { clip-path: inset(var(--inset-y, 24%) var(--inset-x, 24%) round var(--round, 36px)); }
+.scrub .open-frame img { transform: scale(var(--zoom, 1.22)); }
+.scrub .open-frame::after { opacity: var(--shade, 0); }
+.scrub .open-text { opacity: var(--shade, 0); transform: translateY(var(--text-y, 24px)); }
 
 /* רצועת הציטוט נפתחת מהמרכז לרוחב מלא */
 .motion .quote-band { clip-path: inset(0 var(--band, 0%) round 24px); }
@@ -387,11 +387,11 @@ ul, ol { margin: 0; padding: 0; }
 @media (max-width: 900px) {
   .float-letter { font-size: 5rem; }
   .hero .l2 { display: none; }
-  .motion .open-scroll { height: 200vh; }
+  .scrub .open-scroll { height: 320vh; }
   .open-frame img { object-position: 24% center; }
 }
 @media print {
   .intro, .scroll-progress, .marquee { display: none !important; }
   .motion * { opacity: 1 !important; clip-path: none !important; animation: none !important; }
-  .motion .open-scroll { height: auto; }
+  .scrub .open-scroll { height: auto; }
 }

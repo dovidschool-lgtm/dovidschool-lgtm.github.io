@@ -103,23 +103,24 @@ function update() {
   header.classList.toggle('is-scrolled', y > 12);
   const max = root.scrollHeight - vh;
   bar.style.setProperty('--scroll', max > 0 ? (y / max).toFixed(4) : '0');
-  if (!motion) return;
-
-  if (heroBlock && desktop) heroBlock.style.setProperty('--drift', `${(y * 0.18).toFixed(1)}px`);
 
   if (opener) {
     const box = opener.getBoundingClientRect();
     const p = clamp(-box.top / (box.height - vh));
-    const eased = 1 - (1 - p) ** 2;
+    const eased = 1 - (1 - clamp(p / 0.8)) ** 2;
     const mobile = window.innerWidth < 700;
-    openFrame.style.setProperty('--inset-y', `${((1 - eased) * (mobile ? 30 : 22)).toFixed(2)}%`);
-    openFrame.style.setProperty('--inset-x', `${((1 - eased) * (mobile ? 10 : 26)).toFixed(2)}%`);
+    openFrame.style.setProperty('--inset-y', `${((1 - eased) * (mobile ? 33 : 22)).toFixed(2)}%`);
+    openFrame.style.setProperty('--inset-x', `${((1 - eased) * (mobile ? 24 : 26)).toFixed(2)}%`);
     openFrame.style.setProperty('--round', `${((1 - eased) * 40).toFixed(1)}px`);
     openFrame.style.setProperty('--zoom', (1.22 - eased * 0.22).toFixed(3));
-    const shade = clamp((p - 0.55) / 0.3);
+    const shade = clamp((p - 0.7) / 0.22);
     openFrame.style.setProperty('--shade', shade.toFixed(3));
     openFrame.style.setProperty('--text-y', `${((1 - shade) * 24).toFixed(1)}px`);
   }
+
+  if (!motion) return;
+
+  if (heroBlock && desktop) heroBlock.style.setProperty('--drift', `${(y * 0.18).toFixed(1)}px`);
 
   bands.forEach((band) => {
     const box = band.getBoundingClientRect();
