@@ -69,7 +69,7 @@ if (motion && document.body.dataset.page !== 'registerForm') {
     });
   }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
   items.forEach((el) => {
-    if (el.closest('.open-text')) return;
+    if (el.closest('.open-text, .tree-list')) return;
     const order = [...el.parentElement.children].indexOf(el);
     el.style.setProperty('--d', `${Math.min(order, 6) * 70}ms`);
     reveal.observe(el);
@@ -92,6 +92,8 @@ const bar = document.querySelector('.scroll-progress');
 const heroBlock = document.querySelector('.hero');
 const opener = document.querySelector('[data-open-scroll]');
 const openFrame = opener && opener.querySelector('.open-pin');
+const tree = document.querySelector('[data-tree]');
+const treeItems = tree ? [...tree.querySelectorAll('.tree-item')] : [];
 const bands = [...document.querySelectorAll('.quote-band')];
 const drifting = desktop ? [...document.querySelectorAll('[data-parallax]')] : [];
 let queued = false;
@@ -116,6 +118,15 @@ function update() {
     const shade = clamp((p - 0.7) / 0.22);
     openFrame.style.setProperty('--shade', shade.toFixed(3));
     openFrame.style.setProperty('--text-y', `${((1 - shade) * 24).toFixed(1)}px`);
+  }
+
+  if (tree) {
+    const box = tree.getBoundingClientRect();
+    tree.style.setProperty('--grow', clamp((vh * 0.8 - box.top) / box.height).toFixed(4));
+    treeItems.forEach((item) => {
+      const top = item.getBoundingClientRect().top;
+      item.style.setProperty('--p', clamp((vh * 0.95 - top) / (vh * 0.4)).toFixed(3));
+    });
   }
 
   if (!motion) return;
