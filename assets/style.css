@@ -415,7 +415,7 @@ li.tree-group h2 { background: var(--navy); color: var(--white); font-size: 1.25
 .open-text h2 { color: var(--white); font-size: clamp(1.8rem, 5vw, 3.2rem); }
 .open-text p { font-size: clamp(1.15rem, 2.6vw, 1.5rem); margin: 0; }
 .open-frame::after { content: ''; position: absolute; inset: 0; background: rgba(8, 58, 99, .55); }
-.scrub .open-scroll { height: 280vh; }
+.scrub .open-scroll { height: 220vh; }
 .scrub .open-pin { position: sticky; top: 0; height: 100vh; height: 100svh; min-height: 0; }
 .scrub .open-frame { clip-path: inset(var(--inset-y, 24%) var(--inset-x, 24%) round var(--round, 36px)); }
 .scrub .open-frame img { transform: scale(var(--zoom, 1.22)); }
@@ -428,7 +428,7 @@ li.tree-group h2 { background: var(--navy); color: var(--white); font-size: 1.25
 @media (max-width: 900px) {
   .float-letter { font-size: 5rem; }
   .hero .l2 { display: none; }
-  .scrub .open-scroll { height: 320vh; }
+  .scrub .open-scroll { height: 170vh; }
   .open-frame img { object-position: 24% center; }
 }
 @media print {
