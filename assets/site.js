@@ -60,7 +60,7 @@ if (motion && window.Lenis) {
 
 // כניסה בגלילה. הרשימה זהה לזו שב-style.css
 if (motion && document.body.dataset.page !== 'registerForm') {
-  const items = document.querySelectorAll('main h2, .section .lead, .section > .wrap > .tab-label, main .card, main .pillar, main .schedule li, main .adapt li, main .steps li, main .rule, main .downloads li, main .prose p, main .ticks li, main .callout, main .table-scroll, main .hours div, main .contact-list li, main blockquote, main figcaption, main .fact');
+  const items = document.querySelectorAll('main h2, .section .lead, .section > .wrap > .tab-label, main .card, main .pillar, main .schedule li, main .adapt li, main .steps li, main .rule, main .downloads li, main .prose p, main .ticks li, main .callout, main .table-scroll, main .hours div, main .contact-list li, main blockquote, main figcaption, main .fact, main .timeline li');
   const reveal = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;

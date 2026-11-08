@@ -274,6 +274,19 @@ ul, ol { margin: 0; padding: 0; }
   [dir="rtl"] .site-nav a[aria-current="page"] { box-shadow: inset -4px 0 0 var(--green); }
   .site-nav .nav-cta[aria-current="page"] { box-shadow: none; }
 }
+/* ציר החיים בעמוד הרב חנזין */
+.chanzin-hero h1 { margin-bottom: .1em; }
+.timeline { list-style: none; margin: 8px 0 0; padding: 0; max-width: 860px; }
+.timeline li { --year: 116px; display: grid; grid-template-columns: var(--year) 1fr; gap: 22px; padding-bottom: 30px; position: relative; }
+.timeline li::before { content: ""; position: absolute; inset-block: 0; inset-inline-start: calc(var(--year) / 2 - 1.5px); width: 3px; background: var(--line); }
+.timeline li:last-child::before { bottom: auto; height: 24px; }
+.timeline-year { position: relative; z-index: 1; justify-self: center; align-self: start; margin: 0; display: flex; flex-direction: column; align-items: center; min-width: 92px; padding: 8px 12px; border-radius: 16px; background: var(--navy); color: var(--white); font-family: var(--font-head); font-weight: 700; line-height: 1.2; }
+.timeline-year small { font-family: var(--font-body); font-weight: 600; font-size: .9rem; color: #d6e6f5; }
+.timeline .is-key .timeline-year { background: var(--green-dark); }
+.timeline .is-key > div { background: var(--green-soft); border-radius: var(--radius); padding: 14px 18px; }
+.timeline h3 { margin: 4px 0 .2em; }
+.timeline li p:last-child { margin-bottom: 0; }
+
 /* עץ הצוות: קו אחד יורד מהראש, וכל אדם נפתח ממנו לצד שלו לפי הגלילה */
 .tree { --gap: 72px; --node: 84px; overflow-x: clip; }
 .tree-group { text-align: center; }
@@ -312,6 +325,8 @@ li.tree-group h2 { background: var(--navy); color: var(--white); font-size: 1.25
 }
 @media (max-width: 600px) {
   .tree { --gap: 28px; --node: 64px; }
+  .timeline li { --year: 84px; gap: 14px; }
+  .timeline-year { min-width: 76px; padding: 6px 8px; font-size: .95rem; }
   .tree-item { margin-top: -84px; }
   .tree-root { max-width: 220px; }
   body { font-size: 1.08rem; }
@@ -373,7 +388,7 @@ li.tree-group h2 { background: var(--navy); color: var(--white); font-size: 1.25
 .motion .hero::before { transform: translateY(var(--drift, 0)); }
 
 /* כניסה בגלילה. הרשימה זהה לזו שב-site.js */
-.motion body:not([data-page="registerForm"]) main :is(h2, .section .lead, .section > .wrap > .tab-label, .card, .pillar, .schedule li, .adapt li, .steps li, .rule, .downloads li, .prose p, .ticks li, .callout, .table-scroll, .hours div, .contact-list li, blockquote, figcaption, .fact):not(.open-text h2):not(.tree-list *):not(.in) { opacity: 0; }
+.motion body:not([data-page="registerForm"]) main :is(h2, .section .lead, .section > .wrap > .tab-label, .card, .pillar, .schedule li, .adapt li, .steps li, .rule, .downloads li, .prose p, .ticks li, .callout, .table-scroll, .hours div, .contact-list li, blockquote, figcaption, .fact, .timeline li):not(.open-text h2):not(.tree-list *):not(.in) { opacity: 0; }
 .motion main .in { animation: rise .85s var(--ease) var(--d, 0s) backwards; }
 .clip-box { display: block; }
 .motion .clip-box > img:not(.in) { clip-path: inset(100% 0 0 0); }
