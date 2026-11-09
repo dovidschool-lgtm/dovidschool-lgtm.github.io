@@ -274,6 +274,30 @@ ul, ol { margin: 0; padding: 0; }
   [dir="rtl"] .site-nav a[aria-current="page"] { box-shadow: inset -4px 0 0 var(--green); }
   .site-nav .nav-cta[aria-current="page"] { box-shadow: none; }
 }
+/* תמונות: רצועה בעמודים, גלריה ותצוגה מוגדלת */
+.photo-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-block: 8px 16px; }
+.photo-strip-4 { grid-template-columns: repeat(4, 1fr); }
+.photo-strip a, .photo-grid a { display: block; overflow: hidden; border-radius: 14px; box-shadow: var(--shadow); background: var(--cream-deep); }
+.photo-strip img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.photo-grid { columns: 3 230px; column-gap: 14px; margin-top: 8px; }
+.photo-grid a { margin-bottom: 14px; break-inside: avoid; }
+.photo-grid img { display: block; width: 100%; height: auto; }
+.photo-strip img, .photo-grid img { transition: transform .5s var(--ease); }
+.photo-strip a:hover img, .photo-grid a:hover img { transform: scale(1.05); }
+.btn-ghost svg { width: 22px; height: 22px; }
+.lightbox { width: 100vw; height: 100vh; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: rgba(6, 22, 38, .95); color: var(--white); }
+.lightbox[open] { display: grid; grid-template-columns: 64px 1fr 64px; align-items: center; }
+.lightbox::backdrop { background: transparent; }
+.lightbox figure { margin: 0; min-width: 0; text-align: center; }
+.lightbox img { max-width: 100%; max-height: 84vh; max-height: 84dvh; object-fit: contain; border-radius: 10px; }
+.lightbox figcaption { margin-top: 10px; font-size: 1rem; color: #d6e6f5; }
+.lightbox button { background: none; border: 0; color: var(--white); cursor: pointer; display: grid; place-items: center; }
+.lightbox-nav { height: 64px; }
+.lightbox-nav svg { width: 34px; height: 34px; }
+[dir="rtl"] .lightbox-nav svg, .lightbox-next svg { transform: scaleX(-1); }
+[dir="rtl"] .lightbox-next svg { transform: none; }
+.lightbox-close { position: absolute; top: 10px; inset-inline-end: 14px; width: 48px; height: 48px; font-size: 2.4rem; line-height: 1; }
+
 /* ציר החיים בעמוד הרב חנזין */
 .chanzin-hero h1 { margin-bottom: .1em; }
 .timeline { list-style: none; margin: 8px 0 0; padding: 0; max-width: 860px; }
@@ -325,6 +349,11 @@ li.tree-group h2 { background: var(--navy); color: var(--white); font-size: 1.25
 }
 @media (max-width: 600px) {
   .tree { --gap: 28px; --node: 64px; }
+  .photo-strip, .photo-strip-4 { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .photo-grid { columns: 2; column-gap: 8px; }
+  .photo-grid a { margin-bottom: 8px; border-radius: 10px; }
+  .lightbox[open] { grid-template-columns: 40px 1fr 40px; }
+  .lightbox-nav svg { width: 26px; height: 26px; }
   .timeline li { --year: 84px; gap: 14px; }
   .timeline-year { min-width: 76px; padding: 6px 8px; font-size: .95rem; }
   .tree-item { margin-top: -84px; }

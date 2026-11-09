@@ -86,6 +86,44 @@ if (motion && document.body.dataset.page !== 'registerForm') {
   document.querySelectorAll('.clip-box').forEach((box) => clip.observe(box));
 }
 
+// תצוגה מוגדלת בגלריה: לחיצה פותחת, חצים והחלקה עוברים בין התמונות של אותו אלבום
+const lightbox = document.querySelector('.lightbox');
+if (lightbox) {
+  const big = lightbox.querySelector('img');
+  const caption = lightbox.querySelector('figcaption');
+  const rtl = root.dir === 'rtl';
+  let group = [];
+  let at = 0;
+  const show = (i) => {
+    at = (i + group.length) % group.length;
+    big.src = group[at].href;
+    big.alt = group[at].querySelector('img').alt;
+    caption.textContent = `${group[at].closest('[data-album]').dataset.album} · ${at + 1}/${group.length}`;
+  };
+  document.querySelectorAll('[data-album] a').forEach((a) => a.addEventListener('click', (e) => {
+    e.preventDefault();
+    group = [...a.closest('[data-album]').querySelectorAll('a')];
+    show(group.indexOf(a));
+    lightbox.showModal();
+  }));
+  lightbox.querySelector('[data-close]').addEventListener('click', () => lightbox.close());
+  lightbox.querySelector('[data-prev]').addEventListener('click', () => show(at - 1));
+  lightbox.querySelector('[data-next]').addEventListener('click', () => show(at + 1));
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.close(); });
+  lightbox.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') show(at + (rtl ? 1 : -1));
+    if (e.key === 'ArrowRight') show(at + (rtl ? -1 : 1));
+  });
+  let startX = null;
+  lightbox.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+  lightbox.addEventListener('touchend', (e) => {
+    if (startX === null) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    startX = null;
+    if (Math.abs(dx) > 50) show(at + ((dx < 0) !== rtl ? 1 : -1));
+  });
+}
+
 // כל מה שתלוי במיקום הגלילה, פעם אחת בכל פריים
 const header = document.querySelector('.site-header');
 const bar = document.querySelector('.scroll-progress');
