@@ -86,6 +86,38 @@ if (motion && document.body.dataset.page !== 'registerForm') {
   document.querySelectorAll('.clip-box').forEach((box) => clip.observe(box));
 }
 
+// גלריה: מתג בית ספר או גן (גם לפי #school או #gan בכתובת), וכפתור "עוד תמונות" בכל חודש
+const divTabs = document.querySelectorAll('[data-div-tab]');
+if (divTabs.length) {
+  const panels = document.querySelectorAll('[data-div]');
+  const siteHeader = document.querySelector('.site-header');
+  const headerHeight = () => root.style.setProperty('--header-h', `${siteHeader.offsetHeight}px`);
+  headerHeight();
+  window.addEventListener('resize', headerHeight);
+  const fromHash = () => (['school', 'gan'].includes(location.hash.slice(1)) ? location.hash.slice(1) : null);
+  const pick = (div) => {
+    panels.forEach((p) => { p.hidden = p.dataset.div !== div; });
+    divTabs.forEach((t) => t.setAttribute('aria-current', t.dataset.divTab === div ? 'true' : 'false'));
+  };
+  pick(fromHash() || 'school');
+  if (fromHash()) requestAnimationFrame(() => document.querySelector('.div-tabs').scrollIntoView());
+  divTabs.forEach((t) => t.addEventListener('click', (e) => {
+    e.preventDefault();
+    pick(t.dataset.divTab);
+    history.replaceState(null, '', `#${t.dataset.divTab}`);
+  }));
+  window.addEventListener('hashchange', () => { if (fromHash()) pick(fromHash()); });
+}
+document.querySelectorAll('.grid-more').forEach((more) => {
+  const grid = more.previousElementSibling;
+  grid.classList.add('is-collapsed');
+  more.hidden = false;
+  more.querySelector('[data-more]').addEventListener('click', () => {
+    grid.classList.remove('is-collapsed');
+    more.remove();
+  });
+});
+
 // תצוגה מוגדלת בגלריה: לחיצה פותחת, חצים והחלקה עוברים בין התמונות של אותו אלבום
 const lightbox = document.querySelector('.lightbox');
 if (lightbox) {
