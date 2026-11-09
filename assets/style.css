@@ -135,6 +135,9 @@ ul, ol { margin: 0; padding: 0; }
 .tree-item:nth-child(3n) .card { border-block-start-color: var(--blue); }
 .tree-item:nth-child(3n+2) .member-photo { background: #fdeaee; color: #b8485e; }
 .tree-item:nth-child(3n) .member-photo { background: #e6eff9; color: var(--navy); }
+.member-photo { position: relative; }
+.member-photo::before { content: ''; position: absolute; width: 78%; aspect-ratio: 1; top: 10%; left: 11%; border-radius: 50%; background: currentColor; opacity: .13; }
+.member-photo > * { position: relative; }
 .member-photo img { width: 100%; height: 100%; object-fit: cover; }
 .member h3 { font-size: 1.2rem; margin-bottom: .15em; }
 .member-role { color: var(--navy); font-weight: 700; line-height: 1.3; margin: 0; }
