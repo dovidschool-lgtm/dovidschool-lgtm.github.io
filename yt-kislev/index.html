@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><script>window.QUIZ_EMBED=true</script><meta name="robots" content="noindex, nofollow"><meta name="referrer" content="strict-origin-when-cross-origin"><style>body{margin:0}[hidden]{display:none!important}</style>
+<title>חידון י"ט כסלו</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Assistant:wght@400;600;700&display=swap">
+<style>
+/* פריסה: מסך אחד של ספרייה בלילה - שאלה למעלה, ספרים כרוכים בתור תשובות, סרגל משחק למטה */
+:root{
+  color-scheme:dark;
+  --night:#1c0f20; --ink:#fffaf0; --gold:#f0cf8a; --soft:#d6c3cf;
+  --ok:#57d98a; --bad:#ff7d74; --panel:rgba(24,10,28,.86); --dark:#2b1430;
+  --display:"Frank Ruhl Libre","FrankRuehl","David",serif;
+  --ui:"Assistant","Segoe UI",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--night);color:var(--ink);font-family:var(--ui);overflow:hidden}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+#app{position:relative;z-index:1;height:100%;direction:rtl;padding-block:10px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.screen{height:100%;max-width:1280px;margin:0 auto}
+/* פתיחה */
+#home{overflow:auto;display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center;padding-block:4vh}
+#home h1{font:900 clamp(3rem,9vw,6.4rem)/1 var(--display);margin:0;text-shadow:0 4px 18px #000}
+#home .sub{font:500 clamp(1.3rem,3vw,2rem)/1.2 var(--display);color:var(--gold);margin:0}
+#home p{margin:0;max-width:56ch;font-size:1.1rem;line-height:1.55;color:var(--soft)}
+#home .sub + p{background:var(--panel);border-radius:10px;padding:12px 20px}
+.modes{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.big{background:var(--panel);border:2px solid var(--gold);border-radius:10px;padding:16px 24px;width:min(300px,100%);font-size:1.02rem;color:var(--soft)}
+.big b{display:block;font:700 1.6rem/1.25 var(--display);color:var(--ink)}
+.big:hover,.chip:hover{background:#52304d}
+.classes{background:var(--panel);border-radius:10px;padding:12px 18px;display:flex;flex-direction:column;gap:10px;align-items:center}
+.row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chip{background:var(--panel);border:1px solid var(--gold);border-radius:8px;padding:9px 16px;font-weight:700;font-size:1.1rem}
+input{font:700 1.1rem var(--ui);color:var(--ink);background:rgba(0,0,0,.45);border:1px solid var(--gold);border-radius:8px;padding:9px 12px;width:170px;max-width:100%;text-align:center}
+/* משחק */
+#game{display:grid;grid-template-rows:auto auto minmax(0,1fr) auto auto;gap:10px}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;font-weight:700;font-size:1.25rem;font-variant-numeric:tabular-nums}
+.teams{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.team{font-size:.98rem;padding:3px 10px;border-radius:7px;background:rgba(0,0,0,.4);color:var(--soft)}
+.team.on{background:var(--gold);color:var(--dark)}
+.tag{background:var(--gold);color:var(--dark);border-radius:7px;padding:2px 12px;font-size:1.05rem}
+#q{font:700 clamp(1.5rem,4.1vw,3.3rem)/1.18 var(--display);text-align:center;text-wrap:balance;margin:0;text-shadow:0 3px 10px #000,0 0 3px #000;padding-block:4px 8px}
+#q.long{font-size:clamp(1.2rem,2.7vw,2.1rem)}
+#books{display:flex;gap:clamp(12px,2.4vw,34px);justify-content:center;align-items:stretch;min-height:0}
+.book{position:relative;flex:1 1 0;min-width:0;max-width:300px;max-height:470px;margin-block:auto;height:100%;border-radius:5px 12px 4px 4px;
+  background:linear-gradient(100deg,rgba(255,255,255,.2),rgba(255,255,255,0) 30%,rgba(0,0,0,.28)),var(--c);
+  box-shadow:inset 0 -18px 0 -2px #d9cdbb,inset 0 -21px 0 -2px rgba(0,0,0,.4),inset 14px 0 12px -8px rgba(0,0,0,.55),0 12px 24px rgba(0,0,0,.55);
+  transition:transform .18s,opacity .4s,filter .4s}
+.book::before{content:"";position:absolute;inset:14px 14px 32px 26px;border:2px solid rgba(240,207,138,.75);outline:1px solid rgba(240,207,138,.45);outline-offset:-7px;border-radius:3px;pointer-events:none}
+.book svg{position:absolute;width:30px;height:30px;fill:none;stroke:#f0cf8a;stroke-width:2.2;opacity:.9;pointer-events:none}
+.book .cr{top:26px;left:38px}
+.book .cl{top:26px;right:26px;transform:scaleX(-1)}
+.book .flame{bottom:46px;left:calc(50% - 9px)}
+.lbl{position:absolute;inset:52px 28px 80px 40px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;
+  font:700 2.2rem/1.16 var(--display);text-shadow:0 2px 5px rgba(0,0,0,.85)}
+.book:not(:disabled):hover{transform:translateY(-8px)}
+.book:disabled{cursor:default;color:inherit}
+.book.dim{opacity:.24;filter:saturate(.5)}
+.book.good{transform:scale(1.03);box-shadow:inset 0 -18px 0 -2px #d9cdbb,0 0 0 5px var(--ok),0 0 38px var(--ok)}
+.book.wrong{box-shadow:inset 0 -18px 0 -2px #d9cdbb,0 0 0 5px var(--bad)}
+.mark{position:absolute;bottom:24px;right:10px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font:900 2.1rem/1 var(--ui);background:var(--ok);color:#06301a}
+.wrong .mark{background:var(--bad);color:#3d0703}
+#fact{min-height:74px;display:flex;align-items:center;justify-content:center;gap:16px;text-align:center}
+#fact .txt{background:var(--panel);border-radius:10px;padding:9px 18px;font-size:clamp(1rem,1.7vw,1.22rem);line-height:1.4;max-width:75ch;min-width:0}
+#fact b.ok{color:var(--ok)}
+#fact b.no{color:var(--bad)}
+.next{background:var(--gold);color:var(--dark);font-weight:700;font-size:1.2rem;border-radius:9px;padding:11px 24px;white-space:nowrap}
+.next:hover{background:#ffe3a8}
+.ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center}
+.ic:hover{background:rgba(255,255,255,.16)}
+.ic:disabled{opacity:.3;cursor:default}
+.ic svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.grp{display:flex;align-items:center;gap:4px}
+.chip.on{background:var(--gold);color:var(--dark)}
+a.chip{text-decoration:none;color:var(--ink)}
+#songs .chip{font-size:1rem;padding:7px 13px}
+#dock{position:fixed;left:14px;bottom:70px;width:232px;height:204px;z-index:5;border:2px solid var(--gold);border-radius:8px;overflow:hidden;background:#000}
+#dock iframe{display:block;width:100%;height:100%;border:0}
+@media(min-width:901px){.yt #app{padding-left:262px}}
+@media(max-width:900px){#dock{left:50%;transform:translateX(-50%);bottom:64px;height:200px}.yt #app{padding-bottom:210px}}
+/* סיום */
+#end{overflow:auto;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;padding-block:3vh}
+#end h2{font:900 clamp(2.6rem,7vw,4.6rem)/1.05 var(--display);margin:0;text-shadow:0 3px 14px #000}
+.res{display:flex;flex-wrap:wrap;gap:34px;justify-content:center;font-size:1.1rem;color:var(--soft)}
+.res b{display:block;font:700 2.6rem/1.1 var(--display);color:var(--ink);direction:ltr}
+table{border-collapse:collapse;background:var(--panel);border-radius:10px;font-size:1.1rem}
+td,th{padding:8px 18px;border-bottom:1px solid rgba(240,207,138,.2)}
+th{color:var(--gold)}
+#rev{list-style:none;margin:0;padding:0;width:100%;max-width:860px;text-align:right;display:grid;gap:8px}
+#rev li{background:var(--panel);border-radius:9px;padding:11px 16px;line-height:1.45}
+#rev .a{color:var(--ok);font-weight:700}
+#rev .y{color:var(--bad)}
+@media(max-width:700px){
+  #books{flex-direction:column;gap:10px;overflow:auto;justify-content:flex-start;padding:6px}
+  .book{flex:1 0 80px;max-width:none;max-height:130px;width:100%;margin-block:0;height:auto}
+  .book .cr,.book .cl,.book .flame{display:none}
+  .book::before{inset:7px 8px 22px 18px;outline:0}
+  .lbl{inset:8px 14px 24px 24px}
+  .mark{width:36px;height:36px;font-size:1.4rem;bottom:22px;right:4px}
+  #fact{flex-direction:column;gap:8px;min-height:0}
+  .next{width:100%}
+}
+@media(min-width:701px) and (max-height:560px){
+  .book .cr,.book .cl,.book .flame{display:none}
+  .book::before{inset:8px 10px 24px 22px;outline:0}
+  .lbl{inset:14px 18px 30px 30px}
+  #q,#q.long{font-size:1.35rem;padding-block:0}
+  #game{gap:4px}
+  #fact{min-height:56px}
+  #fact .txt{font-size:.95rem;padding:5px 12px}
+  .mark{width:38px;height:38px;font-size:1.4rem}
+}
+@media(prefers-reduced-motion:reduce){.book{transition:none}}
+</style></head><body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div id="app">
+  <main class="screen" id="home">
+    <h1>י"ט כסלו</h1>
+    <p class="sub">ראש השנה לחסידות</p>
+    <p>שאלות על סיפור המאסר והגאולה של אדמו"ר הזקן. כל תשובה נכונה מזכה את הכיתה בחלק מהסיפור. כיתה שטעתה ממתינה לתור הבא שלה. הכיתה שאוספת הכי הרבה חלקים מנצחת.</p>
+    <div class="modes">
+      <button class="big" id="mTeams"><b>תחרות כיתות</b>שתי כיתות לסירוגין, 25 שאלות לכל אחת</button>
+      <button class="big" id="mAll"><b>חידון מלא</b>כל 50 השאלות ברצף</button>
+    </div>
+    <div class="classes" id="songBox"><span id="songTitle"></span><div class="row" id="songs"></div></div>
+    <div class="classes"><span>שמות הכיתות (אפשר לשנות):</span>
+      <div class="row"><input id="n0" aria-label="שם הכיתה הראשונה" maxlength="18" value="כיתה א'"><input id="n1" aria-label="שם הכיתה השנייה" maxlength="18" value="כיתה ב'"></div>
+      <span>או 25 שאלות לכיתה אחת:</span><div class="row" id="pick"></div></div>
+  </main>
+  <main class="screen" id="game" hidden>
+    <div class="bar"><span id="score"></span><div class="teams" id="teams"></div><span id="time" dir="ltr"></span></div>
+    <h2 id="q" aria-live="polite"></h2>
+    <div id="books"></div>
+    <div id="fact" aria-live="polite"></div>
+    <div class="bar">
+      <button class="ic" id="bHome" aria-label="חזרה לפתיחה" title="חזרה לפתיחה"><svg viewBox="0 0 24 24"><path d="M3 11 12 3l9 8M5 10v10h14V10"/></svg></button>
+      <div class="grp"><button class="ic" id="bPrev" aria-label="לשאלה הקודמת"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button><span id="pos"></span><button class="ic" id="bNext" aria-label="לשאלה הבאה"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></button></div>
+      <div class="grp"><button class="ic" id="bMus" aria-label="מנגינת רקע" title="מנגינת רקע"><svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/><path class="x" d="" /></svg></button><button class="ic" id="bSnd" aria-label="צליל" title="צליל"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z"/><path class="w" d="M16 9a4 4 0 0 1 0 6"/></svg></button><button class="ic" id="bFull" aria-label="מסך מלא" title="מסך מלא"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div>
+    </div>
+  </main>
+  <main class="screen" id="end" hidden></main>
+</div>
+<aside id="dock" hidden aria-label="נגן יוטיוב"><div id="player"></div></aside>
+<script>
+document.documentElement.lang='he';document.documentElement.dir='rtl';
+// [שאלה, תשובה נכונה, [מסיחים], הסבר] - לפי סדר המצגת, שתי כיתות לסירוגין
+const Q=[
+[`מה שמו של האדמו"ר הזקן?`,`ר' שניאור זלמן`,[`ר' דובער`,`ר' זלמן חיים`],`רבי שניאור זלמן מליאדי, מייסד חסידות חב"ד.`],
+[`למי היה האדמו"ר הזקן תורם צדקה בעיקר?`,`לעניי ארץ ישראל`,[`לעניי פטרבורג`,`לבניית בתי כנסת ברוסיה`],`הוא שלח כסף ליהודים בארץ ישראל, שהיו אז במצב כלכלי קשה.`],
+[`כתב ההלשנה דיווח על עזרה ל:`,`תורכיה, האויבת של רוסיה`,[`פולין`,`אנגליה`],`ארץ ישראל הייתה בשלטון התורכים, ולכן העלילו שהכסף נשלח לאויב.`],
+[`מתי באו לאסור את הרבי בפעם הראשונה ובפעם השנייה?`,`הראשונה בחג הסוכות, השנייה באסרו חג`,[`הראשונה בין יום כיפור לסוכות, השנייה בחנוכה`,`הראשונה בשמחת תורה, השנייה בר"ח כסלו`,`הראשונה בערב ראש השנה, השנייה במוצאי יום כיפור`],`באסרו חג סוכות, בליל שישי, לקחו את הרבי לפטרבורג.`],
+[`מה הייתה תשובתו של ר' שמואל מונקס לרבי על התייעצותו אם לברוח או לא?`,`אם אתה רבי - אין לך ממה לפחד. ואם לא - מגיע לך!`,[`ברח מיד לארץ ישראל`,`הסתתר עד אחרי חנוכה`],`הרבי הניח את ראשו על ידו, חשב זמן מה, והחליט לא לברוח.`],
+[`בעת מאסרו שלח הרבי כמה חסידים לשליחויות שונות. להיכן, ומה הייתה השליחות?`,`לברדיטשוב - למסור פדיון נפש, ולווילנא - לדאוג שהתרגום יהיה מדויק`,[`למעזריטש - להביא ספרים, ולליאדי - להביא אוכל`,`לארץ ישראל - להתפלל בכותל, ולוורשה - לאסוף כסף`],`הפדיון נפש נמסר לר' לוי יצחק מברדיטשוב. בווילנא תרגמו לרוסית את תשובות הרבי לחוקרים.`],
+[`באיזו מרכבה לקחו את אדמו"ר הזקן למאסר?`,`שחורה, של מורדים במלכות`,[`גדולה`,`לבנה, של אנשי הקיסר`],`זו הייתה מרכבה שחורה מיוחדת, שיועדה למורדים במלכות.`],
+[`אילו ניסים עשה ה' בנסיעה כדי שאדמו"ר הזקן לא יחלל שבת?`,`נשבר ציר העגלה, ואחר כך מת הסוס`,[`ירד שלג כבד שחסם את הדרך`,`השוטרים נרדמו והעגלה חזרה לאחור`],`החייל הבין שמשמיים עוזרים לרבי, ועצר בצד הדרך לכל השבת, ליד העיר נעוועל.`],
+[`אדמו"ר הזקן: "תעצור את הסירה כדי שאוכל לקדש לבנה". הפקיד: "מה תיתן לי בתמורה?" מה נתן לו אדמו"ר הזקן?`,`ברכה בכתב יד קדשו`,[`מטבע זהב`,`ספר תניא`],`הפקיד עלה לגדולה, ושמר את הברכה במסגרת זהב.`],
+[`מה מצאו החסידים באבטיח, ומה הבינו מהפתק?`,`פתק בכתב ידו של הרבי - והבינו שהוא חי`,[`מפתח לתא - והבינו שאפשר להבריח אותו`,`מכתב מהקיסר - והבינו שהוא משוחרר`],`עד אז לא ידע איש מהחסידים אם הרבי חי.`],
+[`מי אני? בתוכי נמצא פתק ובו כתוב: "אני הוא האוכל... ואני נמצא במקום..."`,`כלי הדייסה`,[`האבטיח`,`ספר התניא`],`ר' מרדכי מליעפלי הכניס לאוכל פתק ושאל למי הוא מיועד, והרבי השיב לו על הפתק.`],
+[`כמה ימים ישב האדמו"ר הזקן במאסר, וכנגד מה?`,`53, כנגד 53 פרקי תניא`,[`150, כנגד 150 פרקי תהילים`,`14, כנגד גימטריה חב"ד`],`53 ימים, כמניין הפרקים בחלק הראשון של ספר התניא.`],
+[`באיזה תאריך השתחרר האדמו"ר הזקן ממאסר?`,`י"ט כסלו`,[`כ"ד טבת`,`י"ט שבט`],`י"ט כסלו תקנ"ט. בתאריך זה חל גם יום ההילולא של רבו, המגיד ממעזריטש.`],
+[`ספר ידוע שכתב אדמו"ר הזקן:`,`תניא`,[`ליקוטי מוהר"ן`,`מסילת ישרים`],`ספר התניא מכונה "תורה שבכתב של החסידות".`],
+[`השלימו: "תניא בסוף פרק ג' דנידה: משביעים אותו תהי ____ ואל תהי ____, ואפילו כל העולם כולו אומרים לך ____ אתה, היה בעיניך כ____"`,`צדיק, רשע, צדיק, רשע`,[`צדיק, רשע, צדיק, צדיק`,`חכם, רשע, חכם, צדיק`],`ההמשך: "וצריך להבין, דהא תנן ואל תהי רשע בפני עצמך, וגם אם יהיה בעיניו כרשע ירע לבבו ויהיה עצב, ולא יוכל לעבוד ה' בשמחה ובטוב לבב".`],
+[`"פדה בשלום..." - כיצד ניגון זה קשור לגאולת אדמו"ר הזקן?`,`הרבי אמר את הפסוק הזה בתהילים כשבישרו לו שהוא משוחרר`,[`הסוהרים שרו אותו בשער הכלא`,`הפסוק היה כתוב על קירות התא`],`"פדה בשלום נפשי", תהילים פרק נ"ה.`],
+[`מי היה האדם שלו זרק השר את האבטיח עם הפתק?`,`ר' ישראל, גיסו של הרבי`,[`ר' שמואל מונקס, החסיד שיעץ לרבי ללכת למאסר`,`ר' מרדכי, החסיד שהכין לרבי את האוכל`],`ר' ישראל קאזיק חיכה ליד בית השר, וראה אבטיח נופל מהחלון.`],
+[`באיזה יום בשבוע חל י"ט כסלו, חג הגאולה?`,`ביום שלישי`,[`ביום ראשון`,`בשבת`],`הרבי השתחרר ביום שלישי, היום שבו הוכפל "כי טוב".`],
+[`איזו חסידות ייסד אדמו"ר הזקן?`,`חסידות חב"ד`,[`חסידות ברסלב`,`חסידות גור`],`חב"ד הם ראשי תיבות: חכמה, בינה, דעת.`],
+[`כיצד מכונה יום י"ט כסלו?`,`ראש השנה לחסידות וחג הגאולה`,[`ראש השנה לאילנות`,`חג האורים`],`בגאולת הרבי ניתן אישור משמיים להפיץ את תורת החסידות.`],
+[`פטרבורג - מה נמצא שם?`,`המבצר שבו נאסר אדמו"ר הזקן`,[`הבית שבו נולד אדמו"ר הזקן`,`הציון הקדוש של אדמו"ר הזקן`],`המבצר הפטרופבלי, כלא שמור מאוד על אי בעיר הבירה של רוסיה.`],
+[`שני אור - מהם שני הספרים החשובים שכתב אדמו"ר הזקן?`,`תניא ושולחן ערוך`,[`תניא וספר הזוהר`,`כתר שם טוב ושולחן ערוך`],`התניא הוא יסוד תורת חסידות חב"ד, ו"שולחן ערוך הרב" מלמד את ההלכה.`],
+[`איזה פסוק היה כתוב בפתק שממנו הבינו החסידים שהרבי חי?`,`"שמע ישראל ה' אלוקינו ה' אחד"`,[`"ויחי יעקב בארץ מצרים"`,`"ותחי רוח יעקב אביהם"`],`הפסוק נכתב בכתב ידו הקדוש של הרבי.`],
+[`איך הסביר אדמו"ר הזקן לשר את שאלת הקב"ה אל אדם "איכה?"`,`בכל דור ה' שואל כל אדם: היכן אתה בעולמך? מה עשית עד היום?`,[`אדם הסתתר היטב, ולכן ה' קרא לו`,`ה' קרא לאדם לחזור לגן עדן`],`הרבי לימד שהתורה נצחית, והשאלה "איכה" מופנית לכל אחד מאיתנו.`],
+[`מדוע רצה אדמו"ר הזקן לעצור את הסירה?`,`כדי לקדש את הלבנה`,[`כדי לברוח מהחייל`,`כדי לנוח מהדרך`],`זה קרה כשלקחו אותו בסירה לחקירה.`],
+[`מי הגיע לבקר את אדמו"ר הזקן כשהיה במאסר?`,`הבעל שם טוב והמגיד ממעזריטש`,[`בני משפחתו`,`החסידים`],`הם באו אליו מעולם האמת, ואמרו לו להמשיך ללמד חסידות ואף להוסיף.`],
+[`היכן שהה אדמו"ר הזקן לאחר שחרורו?`,`בבית של מתנגד, קומה מתחת לביתו של ר' מרדכי`,[`בארמון הקיסר`,`בבית הכנסת של החסידים`],`הרבי אמר שהזמן הקצר הזה היה קשה לו יותר מכל ימי המאסר.`],
+[`במה היה עסוק הרבי כשהודיעו לו את בשורת השחרור?`,`באמירת תהילים`,[`בכתיבת ספר התניא`,`באכילת הדייסה`],`הוא הגיע בדיוק לפסוק "פדה בשלום נפשי".`],
+[`מה מזכירה לך המילה "דייסה", ובהקשר למה?`,`האוכל הכשר שהרבי הסכים לאכול במאסר, ובו עבר הפתק`,[`האוכל שהפקיד קיבל כדי לעצור את הסירה`,`האוכל שהגיש המתנגד לרבי אחרי השחרור`],`השר הביא את הדייסה מביתו של ר' מרדכי מליעפלי, וכך נודע לחסידים היכן הרבי.`],
+[`איך קראו לחסיד שהיה לבוש בגדים מוזרים?`,`ר' ישראל, גיסו של אדמו"ר הזקן`,[`ר' מאיר, חסיד גדול מהעיר וילנא`,`ר' מרדכי`],`הרבי תיאר לשר את הבגד, החגורה והכובע, וכך השר זיהה אותו ברחוב.`],
+[`מדוע לא רצה האדמו"ר הזקן לאכול את האוכל שהגישו לו בבית הסוהר?`,`לא היה כשר`,[`לא היה טעים`,`היה שרוי בתענית (בצום)`],`הרבי העדיף לרעוב ובלבד שלא לאכול מאכל לא כשר.`],
+[`מדוע אדמו"ר הזקן לא קידש את הלבנה כאשר עצר את הסירה לבד באמצעות נס?`,`רצה לקיים את המצווה בדרך הטבע, בלי נס`,[`הלבנה התכסתה בעננים`,`הסירה לא נעצרה לגמרי`],`לכן הרבי שחרר את הסירה, וביקש מהפקיד לעצור אותה בעצמו.`],
+[`ממה התפעל השר כאשר נכנס לאדמו"ר הזקן?`,`שידע את גילו המדויק`,[`מצדקותו`,`ממסירות הנפש שלו`],`הרבי נקב בגילו של השר, ושאל אותו מה עשה בשנים האלה.`],
+[`איזה שם נוסף יש לספר התניא?`,`ספר של בינונים`,[`ספר קדוש`,`ספר של צדיקים`],`הספר מלמד איך כל אחד יכול להגיע למדרגת "בינוני". הוא נקרא גם "ליקוטי אמרים".`],
+[`איך קראו למתנגד שאדמו"ר הזקן שהה אצלו?`,`אביגדור`,[`ישראל`,`מרדכי`],`ר' ישראל היה גיסו של הרבי, ור' מרדכי היה החסיד שגר קומה אחת מעל.`],
+[`כיצד דרש האדמו"ר הזקן מהחסידים להגיב לאחר שחרורו?`,`לא לריב עם המתנגדים, ולהתייחס אליהם באהבה`,[`להעניש את המלשינים`,`לעבור לגור בעיר אחרת`],`הרבי שלח לחסידים מכתב מיוחד וביקש מהם לנהוג באהבת ישראל.`],
+// שאלות שנוספו על המצגת
+[`באיזו עיירה גר אדמו"ר הזקן כשנאסר?`,`ליאוזנה`,[`מעזריטש`,`וילנא`],`מליאוזנה לקחו אותו עד לעיר הבירה פטרבורג.`],
+[`היכן הסתתר הרבי כשבאו לאסור אותו בפעם הראשונה?`,`בבית העלמין`,[`בבית הכנסת`,`ביער`],`יהודי נשא את הרבי על כתפיו אל מעבר לנהר, עד בית העלמין הסמוך.`],
+[`מה עשתה הרבנית כשהחייל דרש לדעת היכן הרבי?`,`לא גילתה לו`,[`סיפרה לו מיד`,`ביקשה ממנו כסף`],`גם כשהחייל צעק ואיים, היא לא גילתה היכן הרבי.`],
+[`מה קרה כשהרבי הניח תפילין מול הפקידים בכלא?`,`מי שישב לא הצליח לקום, ומי שעמד לא הצליח לשבת`,[`כל הנרות בכלא כבו`,`הדלתות נפתחו לבדן`],`נאמר "וראו כל עמי הארץ כי שם ה' נקרא עליך ויראו ממך" - אלו תפילין שבראש.`],
+[`מי בא לבקר את הרבי בכלא כשהוא מחופש לחוקר רגיל?`,`הקיסר`,[`ר' שמואל מונקס`,`הסוהר הראשי`],`הקיסר שמע על חכמת הרבי, והחליט לבקר אותו בעצמו.`],
+[`איך ידע הרבי שהחוקר המחופש הוא הקיסר?`,`הרגיש יראה ופחד גדולים`,[`ראה את הכתר שלו`,`הסוהר גילה לו`],`הרבי הסביר שהמלכות בעולם דומה למלכות ה', ולכן הרגיש יראה גדולה. הוא גם בירך את הברכה על ראיית מלך.`],
+[`מה ענה הרבי כששאלו אותו אם הוא מאנשי הבעל שם טוב?`,`ענה מיד: כן!`,[`שתק ולא ענה`,`ביקש זמן לחשוב`],`הרבי לא רצה להיפרד מהבעל שם טוב אפילו לרגע אחד, אפילו רק בדיבור.`],
+[`הרבי שאל את הבעל שם טוב והמגיד אם להפסיק ללמד חסידות. מה השיבו לו?`,`להמשיך, ואפילו להוסיף`,[`להפסיק לגמרי`,`ללמד רק בסתר`],`הקטרוג בשמיים בוטל, ואחרי הגאולה התרחבה מאוד תורת החסידות.`],
+[`כמה שאלות הציגו השופטים לרבי במשפט?`,`22`,[`10`,`100`],`עשרים ושתיים שאלות, שסיכמו את כל הטענות נגדו.`],
+[`מה עשה הרבי לפני שיצא מבית המתנגד?`,`שתה את הכוס כדי לכבד את בעל הבית`,[`נתן לו ספר תניא`,`אכל ארוחת ערב`],`גם אחרי הדברים הקשים ששמע, הרבי נהג בכבוד ולא הרשה לפגוע במתנגד.`],
+[`איזה צדיק הסתלק בי"ט כסלו, שנים רבות לפני הגאולה?`,`המגיד ממעזריטש`,[`הבעל שם טוב`,`ר' לוי יצחק מברדיטשוב`],`המגיד, רבו של אדמו"ר הזקן, הסתלק בי"ט כסלו תקל"ג.`],
+[`מה ביקש הרבי לסיים בכל שנה בי"ט כסלו?`,`את לימוד הש"ס`,[`את ספר התהילים`,`את קריאת התורה`],`החסידים מחלקים ביניהם את מסכתות הש"ס, ומסיימים אותן יחד.`],
+[`מדוע חוגגים גם את כ' בכסלו?`,`בלילה יצא הרבי מבית המתנגד, והשמחה גדלה`,[`ביום הזה נולד הרבי`,`ביום הזה נדפס ספר התניא`],`רק כשהגיע הרבי לביתו של ר' מרדכי פרצה השמחה הגדולה.`],
+[`מהם ראשי התיבות של חב"ד?`,`חכמה, בינה, דעת`,[`חסד, ברכה, דרך`,`חיים, בריאות, דעת`],`אלו שלושת כוחות השכל שעליהם בנויה חסידות חב"ד.`]
+];
+const $=id=>document.getElementById(id),DEF=["כיתה א'","כיתה ב'"],CL=DEF.slice();
+try{const s=JSON.parse(localStorage.getItem('ytk-names'));if(Array.isArray(s))[0,1].forEach(k=>{if(typeof s[k]==='string'&&s[k])$('n'+k).value=s[k]})}catch(e){}
+const COLORS=['#a3222b','#0f7a4c','#b5610f','#24558f'];
+let G=null,sound=true,ac=null,tick=null;
+const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+function show(id){['home','game','end'].forEach(s=>$(s).hidden=s!==id)}
+function tone(fs,type){
+  if(!sound)return;
+  try{
+    ctx();duck();
+    fs.forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime+i*.12;o.type=type;o.frequency.value=f;
+      g.gain.setValueAtTime(.16,t);g.gain.exponentialRampToValueAtTime(.001,t+.32);o.connect(g).connect(ac.destination);o.start(t);o.stop(t+.34)});
+  }catch(e){}
+}
+const clock=()=>(G.sec/60|0)+':'+String(G.sec%60).padStart(2,'0');
+const right=it=>it.pick!==null&&it.opts[it.pick]===Q[it.i][1];
+const pts=k=>G.items.filter(it=>(k==null||it.k===k)&&right(it)).length;
+function start(mode,c){
+  let ids=Q.map((_,i)=>i);if(mode==='one')ids=ids.filter(i=>i%2===c);
+  G={mode,c,i:0,sec:0,items:ids.map(i=>({i,k:i%2,opts:shuffle([Q[i][1],...Q[i][2]]),pick:null}))};
+  clearInterval(tick);tick=setInterval(()=>{G.sec++;$('time').textContent=clock()},1000);
+  show('game');draw();musicOn();
+}
+// שירי יוטיוב: בגרסה שרצה משרת (הפעלה מהמחשב או אתר) הנגן מוטמע. בגרסה פרטית או בקובץ פתוח ישירות נפתחים בלשונית.
+const SONGS=[['ExqQ2G_KkxE','מקהלת ת"ת חב"ד נתניה'],['n4KSXVdA8BI','ערוץ חב"ד לילדים'],['bXmO-7EClqI','ניגוני חב"ד'],['FHEb5mWkztk','JEM, הרבי'],['5RWYMbel1Fo','הרוש, ג'+"'"+'רופי ופרידמן']];
+const YT=window.QUIZ_EMBED===true&&/^https?:$/.test(location.protocol);
+let song=0,frame=null,ytOn=false;
+function ytCmd(f,a){if(frame&&frame.contentWindow)frame.contentWindow.postMessage(JSON.stringify({event:'command',func:f,args:a||[]}),'https://www.youtube-nocookie.com')}
+function ytShow(){
+  const ids=SONGS.map((_,k)=>SONGS[(song+k)%SONGS.length][0]);
+  frame=document.createElement('iframe');frame.title='שיר רקע: '+SONGS[song][1];frame.allow='autoplay; encrypted-media; picture-in-picture';
+  frame.referrerPolicy='strict-origin-when-cross-origin';
+  frame.src='https://www.youtube-nocookie.com/embed/'+ids[0]+'?autoplay=1&loop=1&playlist='+ids.join(',')+'&enablejsapi=1&rel=0&playsinline=1&hl=he&origin='+encodeURIComponent(location.origin);
+  frame.onload=()=>{setTimeout(()=>ytCmd('setVolume',[35]),800);setTimeout(()=>ytCmd('setVolume',[35]),2500)};
+  $('player').replaceChildren(frame);$('dock').hidden=false;document.body.classList.add('yt');ytOn=true;fit();
+}
+function ytHide(){$('player').replaceChildren();frame=null;$('dock').hidden=true;document.body.classList.remove('yt');ytOn=false;fit()}
+function songList(){
+  $('songTitle').textContent=YT?'שיר ראשון לרקע:':'שירי יוטיוב לרקע (נפתחים בלשונית נפרדת):';
+  $('songs').replaceChildren(...SONGS.map(([id,n],k)=>{
+    if(YT){const b=el('button','chip'+(k===song?' on':''),n);b.onclick=()=>{song=k;songList()};return b}
+    const a=el('a','chip',n);a.href='https://www.youtube.com/watch?v='+id;a.target='_blank';a.rel='noopener';
+    a.addEventListener('click',()=>{if(mus)$('bMus').click()});return a;
+  }));
+}
+// מנגינת הרקע: הבית הראשון של הניגון המסורתי "פדה בשלום" (סול מינור, 4/4). [צליל, אורך ברבעים]
+const N={f:53,F:65,G:67,A:69,B:70,C:72,D:74,E:75,H:77,J:79};
+const P1='G1 G1 G1 C.5 A.5|B1.5 A.5 B.75 A.25 G1|G.5 A.5 B1 A.5 B.5 C1|A.75 G.25 F3|G1 G1 E1 D1|C4|B1 D1 A1 B.5 A.5|';
+const SONG=(P1+'G1 D1 B1 G1|'+P1+'G4|'
+ +'E1 E1 E1.5 D.5|E.5 H.5 E.5 D.5 C2|D1 D1 D1 D1|C.5 E.5 D.5 C.5 B.5 F.5 B.5 C.5|'
+ +'E1 E1 J1.5 E.5|E.5 H.5 E.5 D.5 C2|D1 D1 D1 D1|C.5 E.5 D.5 C.5 B2|'
+ +'B.5 F.5 G.5 A.5 B.5 F.5 G.5 A.5|B1.5 A.5 G2|C.5 G.5 A.5 B.5 C.5 G.5 A.5 B.5|C1.5 B.5 A2|'
+ +'F1 G.5 A.5 B1 A.5 G.5|D1 D1 C1.5 G.5|B1 D1 A1 B.5 A.5|G4').split('|');
+const CH={g:[43,58,62,67],c:[48,60,63,67],f:[41,57,60,65],d:[50,57,62,66],b:[46,58,62,65]};
+const HARM='ggggccdg'.replace(/^gggg/,'gggf')+'gggfccdg'+'ccbfccbb'+'bgcffgdg';
+let mus=true,mg=null,mTimer=null,mBar=0,mAt=0;
+try{mus=localStorage.getItem('ytk-mus')!=='0'}catch(e){}
+const hz=m=>440*Math.pow(2,(m-69)/12);
+function ctx(){ac=ac||new (window.AudioContext||window.webkitAudioContext)();if(ac.state==='suspended')ac.resume();return ac}
+function voice(m,t,d,v,type,cut){
+  const o=ac.createOscillator(),g=ac.createGain(),f=ac.createBiquadFilter();
+  o.type=type;o.frequency.value=hz(m);f.type='lowpass';f.frequency.value=cut;
+  g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(v,t+.05);g.gain.setTargetAtTime(v*.6,t+.06,.25);g.gain.setTargetAtTime(.0001,t+d*.86,.09);
+  o.connect(f).connect(g).connect(mg);o.start(t);o.stop(t+d+.5);
+}
+function schedule(){
+  while(mAt<ac.currentTime+1.2){
+    const b=mBar%SONG.length,q=60/(b<16?84:b<24?90:104);let t=mAt;
+    SONG[b].split(' ').forEach(s=>{const m=N[s[0]],d=parseFloat(s.slice(1))*q;voice(m,t,d,.15,'triangle',2400);voice(m+12,t,d,.025,'sine',4000);t+=d});
+    CH[HARM[b]].forEach((m,i)=>{if(i===0){voice(m,mAt,2*q,.12,'triangle',700);voice(m,mAt+2*q,2*q,.09,'triangle',700)}else voice(m,mAt,4*q,.032,'triangle',1100)});
+    mAt=t;mBar++;if(mBar%SONG.length===0)mAt+=1.5;
+  }
+}
+function musicOn(){
+  if(!mus)return;
+  if(YT){if(!ytOn)ytShow();return}
+  if(mTimer)return;
+  try{ctx();mg=ac.createGain();mg.gain.value=.55;mg.connect(ac.destination);mBar=0;mAt=ac.currentTime+.15;schedule();mTimer=setInterval(schedule,300)}catch(e){}
+}
+function musicOff(){if(YT){ytHide();return}clearInterval(mTimer);mTimer=null;if(mg){const g=mg;mg=null;g.gain.setTargetAtTime(0,ac.currentTime,.1);setTimeout(()=>g.disconnect(),700)}}
+function musicIcon(){$('bMus').querySelector('.x').setAttribute('d',mus?'':'M3 3 21 21');$('bMus').setAttribute('aria-pressed',mus)}
+function duck(){if(mg){const t=ac.currentTime;mg.gain.cancelScheduledValues(t);mg.gain.setTargetAtTime(.18,t,.03);mg.gain.setTargetAtTime(.55,t+.8,.4)}}
+document.addEventListener('visibilitychange',()=>{if(!ac)return;if(document.hidden)ac.suspend();else ac.resume()});
+const CORNER='<path d="M3 27V9q0-6 6-6h18M8 22q0-14 14-14M8 14q6 0 6-6"/>',FLAME='<path d="M15 2q9 10 0 18q-9-8 0-18zM8 24h14M11 28h8"/>';
+const svg=(p,c)=>'<svg class="'+c+'" viewBox="0 0 30 30" aria-hidden="true">'+p+'</svg>';
+function draw(){
+  const it=G.items[G.i],d=Q[it.i],done=it.pick!==null;
+  $('score').textContent='✓ '+pts();$('time').textContent=clock();
+  $('pos').textContent=(G.i+1)+' מתוך '+G.items.length;
+  const T=$('teams');T.replaceChildren();
+  if(G.mode==='teams')CL.forEach((n,k)=>T.append(el('span','team'+(k===it.k?' on':''),n+' · '+pts(k))));
+  else if(G.mode==='one')T.append(el('span','tag',CL[it.k]));
+  $('q').textContent=d[0];$('q').className=d[0].length>75?'long':'';
+  const B=$('books');B.replaceChildren();
+  it.opts.forEach((o,n)=>{
+    const b=el('button','book');b.style.setProperty('--c',COLORS[n]);
+    b.innerHTML=svg(CORNER,'cr')+svg(CORNER,'cl')+svg(FLAME,'flame');
+    b.append(el('span','lbl',o));
+    if(done){
+      const g=o===d[1];b.disabled=true;
+      b.classList.add(g?'good':n===it.pick?'wrong':'dim');
+      if(g||n===it.pick)b.append(el('span','mark',g?'✓':'✕'));
+    }
+    b.onclick=()=>answer(n);B.append(b);
+  });
+  const F=$('fact');F.replaceChildren();
+  if(done){
+    const p=el('div','txt'),ok=right(it),nx=el('button','next',G.i+1<G.items.length?'לשאלה הבאה':'לתוצאות');
+    p.append(el('b',ok?'ok':'no',ok?'מצוין! ':'אופס, שגוי. '),d[3]);
+    nx.onclick=next;F.append(p,nx);nx.focus({preventScroll:true});
+  }
+  $('bPrev').disabled=G.i===0;$('bNext').disabled=!done;
+  fit();
+}
+function fit(){
+  document.querySelectorAll('.lbl').forEach(l=>{
+    let s=innerWidth<=700?22:44;
+    do{l.style.fontSize=s+'px';s-=1}while(s>12&&(l.scrollHeight>l.clientHeight+1||l.scrollWidth>l.clientWidth+1));
+  });
+}
+function answer(n){const it=G.items[G.i];if(it.pick!==null)return;it.pick=n;right(it)?tone([523,659,784],'triangle'):tone([220,165],'sawtooth');draw()}
+function next(){if(G.items[G.i].pick===null)return;if(G.i+1<G.items.length){G.i++;draw()}else finish()}
+function finish(){
+  clearInterval(tick);show('end');tone([523,659,784,1047],'triangle');
+  const E=$('end');E.replaceChildren();E.scrollTop=0;
+  let head='כל הכבוד!';
+  if(G.mode==='teams'){
+    const m=Math.max(...CL.map((_,k)=>pts(k))),w=CL.filter((_,k)=>pts(k)===m);
+    head=m===0?'סוף החידון':w.length===1?w[0]+' ניצחה!':'תיקו!';
+  }
+  E.append(el('h2','',head));
+  const r=el('div','res');
+  [['תשובות נכונות',pts()+' / '+G.items.length],['זמן',clock()]].forEach(([a,b])=>{const s=el('div');s.append(el('b','',b),a);r.append(s)});
+  E.append(r);
+  if(G.mode==='teams'){
+    const t=el('table'),h=el('tr');['כיתה','חלקי סיפור'].forEach(x=>h.append(el('th','',x)));t.append(h);
+    CL.map((n,k)=>[n,pts(k)]).sort((a,b)=>b[1]-a[1]).forEach(([n,p])=>{const tr=el('tr');tr.append(el('td','',n),el('td','',p+' מתוך '+G.items.length/2));t.append(tr)});
+    E.append(t);
+  }
+  const b=el('div','row'),A=el('button','next','משחק חוזר'),H=el('button','chip','לפתיחה');
+  A.onclick=()=>start(G.mode,G.c);H.onclick=home;b.append(A,H);E.append(b);
+  const ul=el('ol');ul.id='rev';
+  G.items.forEach(it=>{const d=Q[it.i],li=el('li');li.append(el('div','',(it.i+1)+'. '+d[0]));if(!right(it))li.append(el('div','y','נבחר: '+it.opts[it.pick]));li.append(el('div','a',d[1]));ul.append(li)});
+  E.append(ul);
+}
+function home(){clearInterval(tick);show('home');musicOff()}
+$('mTeams').onclick=()=>start('teams');$('mAll').onclick=()=>start('all');
+function names(){
+  [0,1].forEach(k=>{CL[k]=$('n'+k).value.trim()||DEF[k]});
+  $('pick').replaceChildren(...CL.map((n,k)=>{const b=el('button','chip',n);b.onclick=()=>start('one',k);return b}));
+  try{localStorage.setItem('ytk-names',JSON.stringify(CL))}catch(e){}
+}
+[0,1].forEach(k=>$('n'+k).oninput=names);names();
+$('bHome').onclick=home;$('bNext').onclick=next;$('bPrev').onclick=()=>{if(G.i){G.i--;draw()}};
+songList();musicIcon();
+$('bMus').onclick=()=>{mus=!mus;mus?musicOn():musicOff();musicIcon();try{localStorage.setItem('ytk-mus',mus?'1':'0')}catch(e){}};
+$('bSnd').onclick=()=>{sound=!sound;$('bSnd').querySelector('.w').setAttribute('d',sound?'M16 9a4 4 0 0 1 0 6':'m16 9 6 6M22 9l-6 6');$('bSnd').setAttribute('aria-pressed',!sound)};
+$('bFull').onclick=()=>{try{const p=document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();if(p&&p.catch)p.catch(()=>{})}catch(e){}};
+addEventListener('keydown',e=>{
+  if($('game').hidden)return;
+  const n=+e.key;
+  if(n>=1&&n<=G.items[G.i].opts.length)answer(n-1);
+  else if(e.key==='ArrowLeft')next();
+  else if(e.key==='ArrowRight')$('bPrev').click();
+});
+function paint(){
+  const c=$('bg'),w=c.width=innerWidth,h=c.height=innerHeight,x=c.getContext('2d');
+  let s=7;const R=()=>(s=(s*16807)%2147483647)/2147483647;
+  x.fillStyle='#2a1628';x.fillRect(0,0,w,h);
+  const H=Math.max(105,h/5.2),pal=['#5b2d46','#3f3a5e','#6d4a3c','#37505a','#70394a','#4b4668','#7a5a45'];
+  for(let y=-H*.3;y<h;y+=H){
+    for(let p=4;p<w;){
+      const bw=12+R()*24,bh=H*(.52+R()*.3),by=y+H-14-bh;
+      x.fillStyle=pal[R()*pal.length|0];x.fillRect(p,by,bw,bh);
+      x.fillStyle='rgba(0,0,0,.28)';x.fillRect(p+bw-3,by,3,bh);
+      x.fillStyle='rgba(240,207,138,.4)';x.fillRect(p+2,by+bh*.18,bw-6,2);x.fillRect(p+2,by+bh*.8,bw-6,2);
+      p+=bw+(R()<.08?26:1);
+    }
+    x.fillStyle='#57334a';x.fillRect(0,y+H-14,w,14);x.fillStyle='rgba(255,255,255,.1)';x.fillRect(0,y+H-14,w,2);
+  }
+  for(let p=0;p<w;p+=Math.max(230,w/4)){x.fillStyle='#4a2a40';x.fillRect(p-9,0,18,h)}
+  const g=x.createLinearGradient(0,0,0,h);g.addColorStop(0,'rgba(34,14,38,.5)');g.addColorStop(.6,'rgba(28,10,30,.62)');g.addColorStop(1,'rgba(14,4,16,.96)');
+  x.fillStyle=g;x.fillRect(0,0,w,h);
+}
+addEventListener('resize',()=>{paint();fit()});paint();
+if(document.fonts)document.fonts.ready.then(fit);
+</script>
+</body></html>
